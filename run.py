@@ -32,10 +32,10 @@ for line in soup.find_all('dt'):
     received_text = res.group(1)
     last_revised = res.group(3)
     if calc_diff(received_text) < timedelta(weeks=4):
-        search_result = requests.get("https://www.reddit.com/search", {"q": url_pdf}, headers={"User-Agent": "Mozilla/5.0"})
+        search_result = requests.get("https://old.reddit.com/search", {"q": url_pdf}, headers={"User-Agent": "Mozilla/5.0"})
         if "seen it" in search_result.text:
             continue
         print(url, title, received_text, search_result.status_code)
-        webbrowser.open("http://reddit.com/r/bitcoin/submit?url={}&title={}".format(quote(url_pdf, safe=''), quote(title, safe='')))
+        webbrowser.open("http://old.reddit.com/r/bitcoin/submit?url={}&title={}".format(quote(url_pdf, safe=''), quote(title, safe='')))
     else:
         break
